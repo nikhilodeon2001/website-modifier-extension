@@ -267,6 +267,6 @@ That's it! You're ready to start selling licenses for your Chrome extension.
 
 For detailed documentation, see:
 - [STRIPE_SETUP_GUIDE.md](STRIPE_SETUP_GUIDE.md) - Complete setup walkthrough
-- [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) - What was built
+- [CHANGELOG.md](CHANGELOG.md) - What was built and changed
 - [ARCHITECTURE.md](ARCHITECTURE.md) - How it works (visual diagrams)
-- [TODO_BEFORE_DEPLOY.md](TODO_BEFORE_DEPLOY.md) - Pre-deployment checklist
+- [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Common issues and solutions
