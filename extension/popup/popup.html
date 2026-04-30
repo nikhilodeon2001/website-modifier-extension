@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Modifier</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-top">
+        <h1>Website Modifier</h1>
+        <a href="https://buy.stripe.com/fZu6oG6203vJgAI4Jaao800" target="_blank" id="buyLicenseLink" class="buy-license-link">Buy License</a>
+      </div>
+      <p class="subtitle">Transform this page with AI-generated content</p>
+    </div>
+
+    <div class="form-group">
+      <label>Transformation Mode:</label>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="mode" value="transform" checked />
+          <span><strong>Transform Mode:</strong> Modify specific details (keeps same topic/story)</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="mode" value="replace" />
+          <span><strong>Replace Mode:</strong> Completely overwrite content with new topic</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group" id="transformPromptGroup">
+      <label for="transformPrompt">Transformation Instruction:</label>
+      <input
+        type="text"
+        id="transformPrompt"
+        placeholder="e.g., Change the unemployment rate from 3.7% to 5.2%"
+        title="Example: Change the unemployment rate from 3.7% to 5.2%"
+        autocomplete="off"
+      />
+      <small style="color: #666; font-size: 11px; margin-top: 4px; display: block;">
+        Describe what specific details to modify (keeps the same overall topic/story)
+      </small>
+    </div>
+
+    <div class="form-group" id="replaceTopicGroup" style="display: none;">
+      <label for="topic">Enter Topic:</label>
+      <input
+        type="text"
+        id="topic"
+        placeholder="e.g., Scientists prove the existence of God"
+        title="Example: Scientists prove the existence of God"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="articleLengthLimit">
+        Article Length Limit: <span id="articleLengthValue">1,000 words</span>
+      </label>
+      <input
+        type="range"
+        id="articleLengthLimit"
+        min="0"
+        max="100"
+        value="50"
+      />
+      <small style="color: #666; font-size: 11px; margin-top: 4px; display: block;">
+        Lower values = faster processing. Long articles may take 1-2 minutes.
+      </small>
+    </div>
+
+    <div class="options">
+      <label class="checkbox-label">
+        <input type="checkbox" id="generateImages" />
+        <span>Generate AI Images</span>
+      </label>
+      <div class="image-options-row" style="display: none;">
+        <button id="selectImagesBtn" class="btn-select-images tooltip-trigger" data-tooltip="Select which images to transform">
+          <span id="selectImagesBtnText">Select Images</span>
+          <span id="selectedCount" style="display: none;">(0 selected)</span>
+        </button>
+        <span class="image-or-divider">or</span>
+        <div class="image-count">
+          <label for="imageCount" class="tooltip-trigger" data-tooltip="max # of generated images">Max:</label>
+          <select id="imageCount">
+            <option value="">—</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="options">
+      <label class="checkbox-label">
+        <input type="checkbox" id="replaceUrl" checked />
+        <span>Replace URL with generated link</span>
+      </label>
+    </div>
+
+    <div class="auto-intercept-section">
+      <div class="section-header">
+        <span class="section-title">🔄 Auto-Apply Cache</span>
+      </div>
+      <div id="autoInterceptPermNote" class="permission-note" style="display:none;">
+        🔒 Enabling requires a one-time permission grant
+      </div>
+      <div class="auto-intercept-toggles">
+        <label class="checkbox-label">
+          <input type="checkbox" id="interceptOriginalUrls" />
+          <span>Auto-intercept original URLs</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="interceptGeneratedUrls" />
+          <span>Auto-intercept generated URLs</span>
+        </label>
+      </div>
+    </div>
+
+    <button id="transformBtn" class="btn-primary">
+      <span class="btn-text">Transform Page</span>
+      <span class="loader" style="display: none;"></span>
+    </button>
+
+    <div id="progressIndicator" class="progress-indicator" style="display: none;">
+      <div class="progress-spinner"></div>
+      <div class="progress-text" id="progressText">Initializing...</div>
+    </div>
+
+    <div class="reset-dropdown">
+      <button id="resetBtn" class="btn-secondary btn-reset-main">
+        Reset Page ▼
+      </button>
+      <div id="resetMenu" class="reset-menu">
+        <button id="resetTempBtn" class="reset-menu-item">
+          <span class="reset-menu-icon">↺</span>
+          <div class="reset-menu-text">
+            <div class="reset-menu-title">Reset Temporarily</div>
+            <div class="reset-menu-desc">Undo changes, keeps cache for reload</div>
+          </div>
+        </button>
+        <button id="resetPermanentBtn" class="reset-menu-item">
+          <span class="reset-menu-icon">🗑️</span>
+          <div class="reset-menu-text">
+            <div class="reset-menu-title">Reset & Clear Cache</div>
+            <div class="reset-menu-desc">Undo changes, removes saved transformation</div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div id="status" class="status" style="display: none;"></div>
+
+    <div class="footer">
+      <a href="#" id="clearFormLink">🗑️ Clear Form</a>
+      <a href="#" id="configLink">⚙️ Settings</a>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

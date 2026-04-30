@@ -1,0 +1,13 @@
+node_modules/
+.wrangler/
+.claude/
+*.zip
+releases/
+for video/
+sceenshots/
+store-assets/
+website/
+cloudflare-worker/
+.DS_Store
+*.mhtml
+package-lock.json

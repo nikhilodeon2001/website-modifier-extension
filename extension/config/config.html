@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Modifier - Settings</title>
+  <link rel="stylesheet" href="config.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Website Modifier Settings</h1>
+      <p class="subtitle">Configure settings for the Website Modifier extension</p>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <h2>🤖 OpenAI API Settings</h2>
+        <p class="description">
+          Enter your OpenAI API key and choose which models to use. Get your API key from
+          <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI Platform</a>.
+        </p>
+
+        <div id="apiKeySavedIndicator" class="licensed-indicator" style="display: none;">
+          <span class="licensed-icon">✅</span>
+          <div class="licensed-content">
+            <div class="licensed-title">API Key Saved</div>
+            <div class="licensed-subtitle">Your key is stored securely • Never visible again</div>
+          </div>
+        </div>
+
+        <div class="form-group" id="apiKeyFormGroup">
+          <label for="apiKey">OpenAI API Key:</label>
+          <input
+            type="password"
+            id="apiKey"
+            placeholder="sk-..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div id="apiKeyButtonGroup">
+          <button id="saveBtn" class="btn-primary">Save API Key</button>
+        </div>
+
+        <div id="apiKeySavedButtonGroup" class="button-group" style="display: none;">
+          <button id="clearApiKeyBtn" class="btn-danger">Clear API Key</button>
+        </div>
+
+        <div id="status" class="status" style="display: none;"></div>
+
+        <hr>
+
+        <!-- Text Generation Settings -->
+        <div class="section">
+          <h3>Text Generation Model</h3>
+          <div class="form-group">
+            <select id="textModel">
+              <option value="gpt-4">GPT-4</option>
+              <option value="gpt-4-turbo" selected>GPT-4 Turbo (Recommended)</option>
+              <option value="gpt-3.5-turbo">GPT-3.5 Turbo (Cheaper & Faster)</option>
+            </select>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- Image Generation Settings -->
+        <div class="section">
+          <h3>Image Generation Model</h3>
+          <div class="form-group">
+            <select id="imageModel">
+              <option value="dall-e-3">DALL-E 3 (Best Quality)</option>
+              <option value="dall-e-2" selected>DALL-E 2 (Recommended)</option>
+            </select>
+          </div>
+
+          <div class="toggle-group" style="margin-top: 15px;">
+            <label class="checkbox-label-block">
+              <input type="checkbox" id="storeImagesLocally" checked />
+              <div class="label-content">
+                <strong>Store generated images locally (persistent, never expire)</strong>
+                <small>Download and save DALL-E images to IndexedDB. Images will persist indefinitely. Disable to use temporary DALL-E URLs (expire in ~1 hour, smaller cache size).</small>
+              </div>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <h2>🔑 License Key</h2>
+        <p class="description">
+          Purchase a lifetime license to remove watermarks from transformed pages.
+        </p>
+
+        <a href="https://buy.stripe.com/fZu6oG6203vJgAI4Jaao800" target="_blank" id="buyLicenseBtn" class="btn-buy-license">
+          <span class="btn-icon-large">💳</span>
+          <div class="btn-content">
+            <div class="btn-title">Buy License - $5 (Lifetime)</div>
+            <div class="btn-subtitle">Remove watermarks forever</div>
+          </div>
+        </a>
+
+        <div id="licensedIndicator" class="licensed-indicator" style="display: none;">
+          <span class="licensed-icon">✅</span>
+          <div class="licensed-content">
+            <div class="licensed-title">Licensed</div>
+            <div class="licensed-subtitle">Watermarks removed • Lifetime access</div>
+          </div>
+        </div>
+
+        <div class="form-group" id="licenseKeyFormGroup">
+          <label for="licenseKey">License Key:</label>
+          <input
+            type="password"
+            id="licenseKey"
+            placeholder="Enter your license key..."
+            autocomplete="off"
+          />
+          <button id="toggleLicenseKey" class="btn-icon" title="Show/Hide License Key">👁️</button>
+        </div>
+
+        <div class="button-group" id="licenseButtonGroup">
+          <button id="saveLicenseBtn" class="btn-primary">Save License Key</button>
+          <button id="clearLicenseBtn" class="btn-danger">Clear License Key</button>
+        </div>
+
+        <div id="licensedButtonGroup" class="button-group" style="display: none;">
+          <button id="clearLicensedBtn" class="btn-danger">Clear License Key</button>
+        </div>
+
+        <div id="licenseStatus" class="status" style="display: none;"></div>
+      </div>
+
+      <div class="card">
+        <h2>🔄 Auto-Apply Transformations</h2>
+        <p class="description">
+          Automatically show cached transformations when visiting URLs
+        </p>
+
+        <div class="toggle-group">
+          <label class="checkbox-label-block">
+            <input type="checkbox" id="interceptOriginalUrls" />
+            <div class="label-content">
+              <strong>Auto-intercept original URLs</strong>
+              <small>When you visit the original page URL, show the transformation</small>
+            </div>
+          </label>
+
+          <label class="checkbox-label-block">
+            <input type="checkbox" id="interceptGeneratedUrls" />
+            <div class="label-content">
+              <strong>Auto-intercept generated URLs</strong>
+              <small>When you visit the fake/generated URL, show the transformation</small>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🐛 Debugging</h2>
+        <p class="description">
+          Enable diagnostic features for troubleshooting
+        </p>
+
+        <div class="toggle-group">
+          <!-- Master toggle: Enable debug logging -->
+          <label class="checkbox-label-block">
+            <input type="checkbox" id="enableDebugLogs" />
+            <div class="label-content">
+              <strong>Enable debug logging</strong>
+              <small>Show detailed console logs for troubleshooting (disabled by default for better performance)</small>
+            </div>
+          </label>
+
+          <!-- Child toggle: Save logs to file (indented, greyed out when parent disabled) -->
+          <label class="checkbox-label-block" id="saveLogsLabel" style="margin-left: 30px; opacity: 0.5;">
+            <input type="checkbox" id="enableLogSaving" disabled />
+            <div class="label-content">
+              <strong>Save debug logs to file</strong>
+              <small>Automatically download logs after each transformation (only available when debug logging is enabled)</small>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📦 Cache Management</h2>
+
+        <div class="stats">
+          <p>Cached transformations: <strong id="cacheCount">0</strong></p>
+          <p>Storage used: <strong id="storageSize">0 KB</strong></p>
+        </div>
+
+        <div class="search-controls">
+          <input type="text" id="cacheSearch" placeholder="Search by URL or topic..." />
+
+          <div class="filter-row">
+            <select id="modeFilter">
+              <option value="all">All Modes</option>
+              <option value="replace">Replace Mode</option>
+              <option value="transform">Transform Mode</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="cacheList" class="cache-list">
+          <!-- Dynamically populated -->
+        </div>
+
+        <button id="clearAllCache" class="btn-danger">Clear All Cache</button>
+      </div>
+
+      <div class="card info-card">
+        <h2>ℹ️ How to Use</h2>
+        <ol>
+          <li>Get your OpenAI API key from <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com/api-keys</a></li>
+          <li>Paste your API key above and click "Save Settings"</li>
+          <li>Navigate to any webpage (e.g., CNN, ESPN, NYTimes)</li>
+          <li>Click the extension icon in your browser toolbar</li>
+          <li>Enter a topic and click "Transform Page"</li>
+          <li>Watch as the page content is replaced with AI-generated content!</li>
+        </ol>
+      </div>
+
+      <div class="card warning-card">
+        <h2>⚠️ Important Notes</h2>
+        <ul>
+          <li><strong>API Costs:</strong> Using this extension will make API calls to OpenAI which may incur costs based on your usage.</li>
+          <li><strong>Rate Limits:</strong> Be aware of OpenAI's rate limits. Image generation may take time.</li>
+          <li><strong>Privacy:</strong> Your API key is stored locally in your browser and never sent anywhere except OpenAI.</li>
+          <li><strong>Page Refresh:</strong> Transformations are temporary. Refresh the page to restore original content, or use the "Reset Page" button.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+</body>
+</html>
