@@ -569,7 +569,7 @@ async function handleTransformPage(request, sendResponse) {
 
     // Use selected models or defaults
     const selectedTextModel = textModel || 'gpt-4';
-    const selectedImageModel = imageModel || 'dall-e-3';
+    const selectedImageModel = imageModel || 'gpt-image-1:high';
 
     debug.log('🤖 [Transform] Text model:', selectedTextModel);
     debug.log('🎨 [Transform] Image model:', selectedImageModel);
@@ -1880,16 +1880,16 @@ async function generateImages(apiKey, prompts, model) {
   for (let i = 0; i < prompts.length; i++) {
     const prompt = prompts[i];
     try {
+      const [modelName, modelQuality] = model.includes(':') ? model.split(':') : [model, null];
       const requestBody = {
-        model: model,
+        model: modelName,
         prompt: prompt,
         n: 1,
         size: '1024x1024'
       };
 
-      // Only add quality parameter for dall-e-3
-      if (model === 'dall-e-3') {
-        requestBody.quality = 'standard';
+      if (modelQuality) {
+        requestBody.quality = modelQuality;
       }
 
       // ============================================================================
@@ -1936,29 +1936,27 @@ async function generateImages(apiKey, prompts, model) {
       }
 
       const data = await response.json();
-      const dalleUrl = data.data[0].url;
+      const b64 = data.data[0].b64_json;
+      // Use a data URI — URL.createObjectURL is not available in service workers
+      const dalleUrl = `data:image/png;base64,${b64}`;
+      // Blob is still needed for IndexedDB storage path
+      const imageBlob = new Blob(
+        [Uint8Array.from(atob(b64), c => c.charCodeAt(0))],
+        { type: 'image/png' }
+      );
 
       // Enhanced success logging
-      console.group(`✅ [DEBUG] DALL-E Response ${i + 1}/${prompts.length}`);
-      debug.log('📥 Image URL received');
+      console.group(`✅ [DEBUG] Image Response ${i + 1}/${prompts.length}`);
+      debug.log('📥 Image received (base64)');
       debug.log('📥 Original prompt:', prompt);
       console.groupEnd();
 
       // Conditionally download and store in IndexedDB
       if (shouldStoreLocally) {
         try {
-          debug.log(`💾 [Image ${i + 1}] Downloading image for local storage...`);
+          debug.log(`💾 [Image ${i + 1}] Saving to IndexedDB...`);
 
-          // Fetch the image blob from DALL-E URL
-          const imageResponse = await fetch(dalleUrl);
-          if (!imageResponse.ok) {
-            throw new Error(`Failed to fetch image: ${imageResponse.status}`);
-          }
-
-          const imageBlob = await imageResponse.blob();
-          debug.log(`   ✓ Downloaded ${(imageBlob.size / 1024).toFixed(1)} KB`);
-
-          // Save to IndexedDB
+          // Save blob directly (already decoded from base64)
           const imageId = await saveImageBlob(imageBlob);
           debug.log(`   ✓ Saved to IndexedDB: ${imageId}`);
 
@@ -1970,9 +1968,8 @@ async function generateImages(apiKey, prompts, model) {
           });
         } catch (storageError) {
           console.error(`❌ [Image ${i + 1}] Failed to store locally:`, storageError);
-          debug.warn(`   ⚠️ Falling back to temporary DALL-E URL`);
+          debug.warn(`   ⚠️ Falling back to blob URL`);
 
-          // Fallback to temporary URL if storage fails
           images.push({
             success: true,
             url: dalleUrl,
@@ -1981,7 +1978,6 @@ async function generateImages(apiKey, prompts, model) {
           });
         }
       } else {
-        // Use temporary DALL-E URL (current behavior)
         images.push({
           success: true,
           url: dalleUrl,

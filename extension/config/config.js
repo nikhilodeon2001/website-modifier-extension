@@ -91,11 +91,11 @@ async function loadSettings() {
 
     // Do not load key value into input — visibility handled by updateApiKeyVisibility()
 
-    if (result.textModel) {
+    if (result.textModel && textModelSelect.querySelector(`option[value="${result.textModel}"]`)) {
       textModelSelect.value = result.textModel;
     }
 
-    if (result.imageModel) {
+    if (result.imageModel && imageModelSelect.querySelector(`option[value="${result.imageModel}"]`)) {
       imageModelSelect.value = result.imageModel;
     }
 
