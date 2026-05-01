@@ -266,3 +266,4 @@ This extension is for educational purposes. Use responsibly and ethically. Be aw
 ---
 
 Built with ❤️ using OpenAI's GPT-4 and GPT Image 1 APIs
+
