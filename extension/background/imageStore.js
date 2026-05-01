@@ -1,5 +1,5 @@
 /**
- * IndexedDB helper module for storing DALL-E images locally
+ * IndexedDB helper module for storing generated images locally
  * Provides persistent storage for generated images so they never expire
  *
  * NOTE: This file is imported into background.js via importScripts(),

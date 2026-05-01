@@ -58,7 +58,7 @@ All notable changes to the Website Modifier extension.
 📝 [Transform] Topic: Scientists prove existence of God
 🔑 [Transform] API key configured: sk-proj...xxxx
 🤖 [Transform] Text model: gpt-4
-🎨 [Transform] Image model: dall-e-3
+🎨 [Transform] Image model: gpt-image-1:high
 
 📊 [Step 1/4] Analyzing page content...
    📊 [Analysis] Found headings: 1 H1, 5 H2, 8 H3
@@ -67,7 +67,7 @@ All notable changes to the Website Modifier extension.
 📝 [Step 2/4] Generating content with gpt-4...
 ✅ [Step 2/4] Content generated in 3542ms
 
-🎨 [Step 3/4] Generating 3 images with dall-e-3...
+🎨 [Step 3/4] Generating 3 images with gpt-image-1:high...
 ✅ [Step 3/4] Generated 3/3 images in 8234ms
 
 🔄 [Step 4/4] Replacing page content...
@@ -117,7 +117,7 @@ All notable changes to the Website Modifier extension.
 
 - Transform any webpage content with AI
 - OpenAI GPT integration (GPT-4, GPT-4 Turbo, GPT-3.5 Turbo)
-- DALL-E image generation (DALL-E 3, DALL-E 2)
+- GPT Image 1 image generation (High Quality, Low)
 - BYOAI (Bring Your Own API key)
 - Configurable models and settings
 - Reset functionality

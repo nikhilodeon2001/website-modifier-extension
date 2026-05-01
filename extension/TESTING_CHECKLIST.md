@@ -14,7 +14,7 @@ Use this to verify the extension works correctly.
 - [ ] Can enter and save API key
 - [ ] Can toggle API key visibility (👁️ button)
 - [ ] Can select text model (GPT-4, GPT-4 Turbo, GPT-3.5)
-- [ ] Can select image model (DALL-E 3, DALL-E 2)
+- [ ] Can select image model (GPT Image 1 — High Quality, Low)
 - [ ] Settings persist after closing and reopening
 
 ## Basic Functionality Test
@@ -104,8 +104,8 @@ Repeat above with different topic: "Scientists cure aging"
 - [ ] Transformation works
 - [ ] Results are high quality
 
-### DALL-E 2 (Cheaper Images)
-- [ ] Select DALL-E 2 in settings
+### GPT Image 1 Low (Faster Images)
+- [ ] Select GPT Image 1 — Low in settings
 - [ ] Images generate successfully
 - [ ] Image quality is acceptable
 

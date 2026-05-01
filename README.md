@@ -6,7 +6,7 @@ A Chrome extension that transforms any webpage's content using AI. Enter a topic
 
 - 🎨 Transform any webpage with AI-generated content
 - 📝 Uses OpenAI GPT models for text generation (GPT-4, GPT-4 Turbo, GPT-3.5)
-- 🖼️ Generates AI images using DALL-E 3 or DALL-E 2
+- 🖼️ Generates AI images using GPT Image 1
 - ⚙️ BYOAI (Bring Your Own AI) - use your own OpenAI API key
 - 🔄 Reset page to original content anytime
 - 💾 Saves your API key and preferences locally
@@ -37,7 +37,7 @@ A Chrome extension that transforms any webpage's content using AI. Enter a topic
 3. Enter your OpenAI API key
 4. Choose your preferred models:
    - **Text Generation**: GPT-4, GPT-4 Turbo, or GPT-3.5 Turbo
-   - **Image Generation**: DALL-E 3 or DALL-E 2
+   - **Image Generation**: GPT Image 1 — High Quality or Low (Faster)
 5. Click **Save Settings**
 
 ## How to Use
@@ -75,9 +75,9 @@ A Chrome extension that transforms any webpage's content using AI. Enter a topic
 2. **AI Generation**: It sends the topic to OpenAI's API to generate:
    - New headlines and subheadlines
    - Article paragraphs matching the topic
-   - Image descriptions for DALL-E
+   - Image descriptions for image generation
 
-3. **Image Generation**: If enabled, it generates AI images using DALL-E
+3. **Image Generation**: If enabled, it generates AI images using GPT Image 1
 
 4. **DOM Replacement**: The extension replaces the original content in the DOM:
    - Replaces all text elements with generated content
@@ -118,11 +118,11 @@ website-modifier/
 - **GPT-4**: ~$0.03 per request (most expensive, best quality)
 - **GPT-4 Turbo**: ~$0.01 per request (good balance)
 - **GPT-3.5 Turbo**: ~$0.001 per request (cheapest, faster)
-- **DALL-E 3**: ~$0.04 per image (1024x1024)
-- **DALL-E 2**: ~$0.02 per image (1024x1024)
+- **GPT Image 1 High**: ~$0.04 per image (1024x1024)
+- **GPT Image 1 Low**: ~$0.02 per image (1024x1024)
 
 **Example cost for one transformation:**
-- 1 topic with GPT-4 + 3 DALL-E 3 images ≈ $0.15
+- 1 topic with GPT-4 + 3 GPT Image 1 High images ≈ $0.15
 
 Monitor your usage at [OpenAI Usage Dashboard](https://platform.openai.com/usage)
 
@@ -165,7 +165,7 @@ Logs use emojis and prefixes for easy scanning:
 📝 [Transform] Topic: Scientists prove existence of God
 🔑 [Transform] API key configured: sk-proj...xxxx
 🤖 [Transform] Text model: gpt-4
-🎨 [Transform] Image model: dall-e-3
+🎨 [Transform] Image model: gpt-image-1:high
 
 📊 [Step 1/4] Analyzing page content...
    🔎 [Analysis] Scanning DOM for elements...
@@ -179,7 +179,7 @@ Logs use emojis and prefixes for easy scanning:
    📥 [API] Response received
 ✅ [Step 2/4] Content generated in 3542ms
 
-🎨 [Step 3/4] Generating 3 images with dall-e-3...
+🎨 [Step 3/4] Generating 3 images with gpt-image-1:high...
    🎨 [Image 1/3] Generating: Scientists in lab discovering...
    ✅ [Image 1/3] Generated successfully
    ⏳ [Image] Waiting 1s before next image...
@@ -204,7 +204,7 @@ If you see errors in the console, here's what they mean:
 | `❌ [API] Request failed: 429` | Rate limit exceeded | Wait 20-60 seconds, try again |
 | `❌ [API] Request failed: 402` | No credits | Add credits to OpenAI account |
 | `❌ [Step 1/4] Failed to analyze page` | Can't access page content | Check if on chrome:// page |
-| `❌ [Image 1/3] Failed: 400` | DALL-E rejected prompt | Try different topic or DALL-E 2 |
+| `❌ [Image 1/3] Failed: 400` | Image prompt rejected | Try a different topic |
 | `❌ [Replace] Error replacing content` | Page structure issue | Try a different website |
 
 ## Troubleshooting
@@ -226,9 +226,9 @@ OpenAI has rate limits. If you hit them:
 
 ### Images not generating?
 
-- DALL-E 3 has stricter content policies than DALL-E 2
-- Try using DALL-E 2 instead
-- Some prompts may be rejected by OpenAI's safety systems
+- Some prompts may be rejected by OpenAI's content policy
+- Try rephrasing your topic
+- Switch to GPT Image 1 — Low (Faster) which may be less strict
 
 ### Page doesn't transform correctly?
 
@@ -265,4 +265,4 @@ This extension is for educational purposes. Use responsibly and ethically. Be aw
 
 ---
 
-Built with ❤️ using OpenAI's GPT-4 and DALL-E APIs
+Built with ❤️ using OpenAI's GPT-4 and GPT Image 1 APIs

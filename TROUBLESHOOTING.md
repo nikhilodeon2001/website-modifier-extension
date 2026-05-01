@@ -57,10 +57,10 @@
 - **May have issues**: Single-page apps (SPAs), dynamic sites
 
 ### Images don't generate
-**Error**: DALL-E returns 400 error
+**Error**: Image generation returns 400 error
 - **Cause**: Content policy violation
 - **Solution 1**: Try a different topic
-- **Solution 2**: Switch to DALL-E 2 (less strict)
+- **Solution 2**: Switch to GPT Image 1 — Low (may be less strict)
 - **Solution 3**: Disable image generation
 
 ### Transformation takes too long
@@ -95,13 +95,13 @@
 ### API costs too high
 **Reduce costs**:
 1. Use GPT-3.5 Turbo instead of GPT-4 (30x cheaper)
-2. Use DALL-E 2 instead of DALL-E 3 (50% cheaper)
+2. Use GPT Image 1 — Low instead of High (50% cheaper)
 3. Reduce number of images generated
 4. Disable images entirely for text-only transformations
 
 **Cost comparison per transformation**:
-- GPT-4 + 3 DALL-E 3 images: ~$0.15
-- GPT-3.5 + 3 DALL-E 2 images: ~$0.06
+- GPT-4 + 3 GPT Image 1 High images: ~$0.15
+- GPT-3.5 + 3 GPT Image 1 Low images: ~$0.06
 - GPT-3.5 + no images: ~$0.001
 
 ## Browser & Website Issues

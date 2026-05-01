@@ -43,7 +43,7 @@ The extension logs every step with emojis for easy scanning:
 📝 [Transform] Topic: Your topic here
 🔑 [Transform] API key configured: sk-xxx...xxx
 🤖 [Transform] Text model: gpt-4
-🎨 [Transform] Image model: dall-e-3
+🎨 [Transform] Image model: gpt-image-1:high
 
 📊 [Step 1/4] Analyzing page content...
    🔎 [Analysis] Scanning DOM for elements...
@@ -59,7 +59,7 @@ The extension logs every step with emojis for easy scanning:
    ✅ [API] Content parsed successfully
 ✅ [Step 2/4] Content generated in 3542ms
 
-🎨 [Step 3/4] Generating 3 images with dall-e-3...
+🎨 [Step 3/4] Generating 3 images with gpt-image-1:high...
    🎨 [Image 1/3] Generating: [description]...
    ✅ [Image 1/3] Generated successfully
    ⏳ [Image] Waiting 1s before next image...
@@ -356,11 +356,11 @@ Or if page has too many elements:
 ❌ [Image 1/3] Failed: 400 content_policy_violation
 ```
 
-**Cause**: DALL-E rejected the prompt due to content policy
+**Cause**: Image prompt rejected due to content policy
 
 **Solutions**:
 - Try a different, less controversial topic
-- Switch to DALL-E 2 (less strict than DALL-E 3)
+- Switch to GPT Image 1 — Low (may be less strict)
 - Disable image generation and use text only
 - Modify topic to be more generic
 
@@ -475,10 +475,10 @@ Watch your API usage in real-time:
 
 - GPT-4: ~$0.03/request
 - GPT-3.5 Turbo: ~$0.001/request
-- DALL-E 3: ~$0.04/image
-- DALL-E 2: ~$0.02/image
+- GPT Image 1 High: ~$0.04/image
+- GPT Image 1 Low: ~$0.02/image
 
-**Example**: Topic with GPT-4 + 3 DALL-E 3 images = ~$0.15
+**Example**: Topic with GPT-4 + 3 GPT Image 1 High images = ~$0.15
 
 ---
 
